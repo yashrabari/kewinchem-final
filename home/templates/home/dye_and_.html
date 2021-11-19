@@ -1,0 +1,216 @@
+{% extends 'home/base.html' %}
+{% block head_link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/css/product.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/footer_.css' %}">
+{% endblock %}
+
+{% block body %}
+<section class="lg-space" id="product">
+    <div class="container">
+        <div class="content">
+            <h1 class="head">Get Free Samples Now.</h1>
+            <p class="para">Samples under 500 grams per product is free to be arranged. Factory standard samples will be
+                sent to you within 2 working days. Counter samples to customer’s standard can be sent within 5 working
+                days.</p><a href="#prod"><button id="c2a">Discover Now</button></a>
+        </div>
+        <div class=""></div>
+    </div>
+</section>
+
+{% if cate_name == "intermediates" %}
+<div id="wrapper" style="margin-top: 4em; margin-bottom: 4em;">
+    <section class="product-cat" id="prod">
+        <div class="container">
+            <div class="pro-cat-detl">
+                <h2>Dyes &amp; Intermediates</h2>
+                <div class="sub-cat cf" style="margin-top: 5em;">
+                    <div class="sub-cat-grid"><a href="{% url 'intermediates_desc' %}">
+                            <figure><img src="{{ cate_images.0.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>Intermediates</h4>
+                                
+                            </div>
+                        </a></div>
+                    <div class="sub-cat-grid"><a href="{% url 'acid_dyes_sub' %}">
+                            <figure><img src="{{ cate_images.1.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View Detail</span>
+                            </figure>
+                            <div class="desc">
+                                <h4>Acid Dyes</h4>
+                                
+                            </div>
+                        </a>
+                    </div>
+                    <div class="sub-cat-grid"><a href="{% url 'basic_dyes' %}">
+                            <figure><img src="{{ cate_images.2.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View Detail</span>
+                            </figure>
+                            <div class="desc">
+                                <h4>Basic Dyes</h4>
+                                
+                            </div>
+                        </a></div>
+                    <div class="sub-cat-grid"><a href="{% url 'direct_dyes' %}">
+                            <figure><img src="{{ cate_images.3.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View Detail</span>
+                            </figure>
+                            <div class="desc">
+                                <h4>Direct Dyes</h4>
+                                
+                            </div>
+                        </a></div>
+                    <div class="sub-cat-grid"><a href="{% url 'food_lake_color' %}">
+                            <figure><img src="{{ cate_images.4.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>Food &amp; Lake Color</h4>
+                                
+                            </div>
+                        </a></div>
+                    <div class="sub-cat-grid"><a href="{% url 'solvent_dyes' %}">
+                            <figure><img src="{{ cate_images.5.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>Solvent Dyes</h4>
+                                
+                            </div>
+                        </a></div>
+                    <div class="sub-cat-grid"><a href="{% url 'reactive_me_dyes' %}">
+                            <figure><img src="{{ cate_images.6.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>Reactive Dyes</h4>
+                                
+                            </div>
+                        </a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% elif cate_name == "food_pharma" %}
+<h1>under construction</h1>
+{% elif cate_name == "shades_pigments" %}
+<h1>under construction</h1>
+{% elif cate_name == "var_cosmetics" %}
+
+<div id="wrapper" style="margin-top: 4em; margin-bottom: 4em;">
+    <section class="product-cat" id="prod">
+        <div class="container">
+            <div class="pro-cat-detl">
+                <h2>Varaities in Cosmetics</h2>
+                <div class="sub-cat cf" style="margin-top: 5em;">
+                    <div class="sub-cat-grid"><a href="{% url 'D_C_color' %}">
+                            <figure><img src="{{ cate_images.0.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>D &amp; C Color</h4>
+                                
+                            </div>
+                        </a>
+                    </div>
+                    <div class="sub-cat-grid"><a href="{% url 'esse_oil_list' %}">
+                            <figure><img src="{{ cate_images.1.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>Essential Oil</h4>
+                                
+                            </div>
+                        </a>
+                    </div>
+                    <div class="sub-cat-grid"><a href="{% url 'lake_color' %}">
+                            <figure><img src="{{ cate_images.2.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>Lake Color</h4>
+                                
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>
+
+
+
+
+{% elif cate_name == "esse_oils" %}
+<div id="wrapper" style="margin-top: 4em; margin-bottom: 4em;">
+    <section class="product-cat" id="prod">
+        <div class="container">
+            <div class="pro-cat-detl">
+                <h2>Varaities in Cosmetics</h2>
+                <div class="sub-cat cf" style="margin-top: 5em;">
+                    {% for oil in oils_name %}
+                    <div class="sub-cat-grid"><a href="{% url oil.ref_url oil_name=oil.oil_type %}">
+                            <figure><img src="{{oil.ref_img.Refrence_image.url}}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>{{oil.name}}</h4>
+                                
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    <div class="sub-cat-grid"><a href="{% url 'oleoresin_oil' %}">
+                            <figure><img src="{{ cate_images.0.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>Oleoresin Oil</h4>
+                                
+                            </div>
+                        </a>
+                    </div>
+                    <div class="sub-cat-grid"><a href="{% url 'natural_flower_oil' %}">
+                            <figure><img src="{{ cate_images.1.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>Natural Flower Oil</h4>
+                                
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </section>
+</div>
+
+{% else %}
+<div id="wrapper" style="margin-top: 4em; margin-bottom: 4em;">
+    <section class="product-cat" id="prod">
+        <div class="container">
+            <div class="pro-cat-detl">
+                <h2>{{ cate_name }}</h2>
+                <div class="sub-cat cf" style="margin-top: 5em;">
+                    {% for product in lists %}
+                    <div class="sub-cat-grid"><a href="{% url cate_url product.0 %}">
+                            <figure><img src="{{ product.1.Refrence_image.url }}" alt="" width = "960px" height = "200px"><span
+                                    class="view-detl">View
+                                    Detail</span></figure>
+                            <div class="desc">
+                                <h4>{{product.2}}</h4>  
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+    </section>
+</div>
+
+{% endif %}
+{% include 'home/footer.html' %}
+{% endblock %}

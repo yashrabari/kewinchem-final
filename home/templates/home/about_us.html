@@ -1,0 +1,68 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block head_link %}
+    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static  'home/css/about_us.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/footer_.css' %}">
+    <script src="{% static 'home/js/jquery3.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}
+{% block body %}
+
+<div class="container m-auto">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="main-timeline">
+                <a href="#" class="timeline">
+                    <div class="timeline-icon"><i class="fa fa-globe"></i></div>
+                    <div class="timeline-content">
+                        <h3 class="title">History</h3>
+                        <p class="description">
+                            {% autoescape off %}
+                            {{data.history}}
+                            {% endautoescape %}
+
+                        </p>
+                    </div>
+                </a>
+                <a href="#" class="timeline">
+                    <div class="timeline-icon"><i class="fa fa-rocket"></i></div>
+                    <div class="timeline-content">
+                        <h3 class="title">Our Vision </h3>
+                        <p class="description">
+                            {% autoescape off %}
+                            {{data.our_vision}}
+                            {% endautoescape %}
+                        </p>
+                    </div>
+                </a>
+                <a href="#" class="timeline">
+                    <div class="timeline-icon"><i class="fa fa-briefcase"></i></div>
+                    <div class="timeline-content">
+                        <h3 class="title">Our Mission</h3>
+                        <p class="description">
+                            {% autoescape off %}
+                            {{data.out_mission}}
+                            {% endautoescape %}
+                        </p>
+                    </div>
+                </a>
+                <a href="#" class="timeline">
+                    <div class="timeline-icon"><i class="fa fa-mobile"></i></div>
+                    <div class="timeline-content">
+                        <h3 class="title">Our Values</h3>
+                        <p class="description">
+                            {% autoescape off %}
+                            {{data.our_value}}
+                            {% endautoescape %}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div
+
+{% include 'home/footer.html' %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'home/base.html' %}
+{% block head_link %}
+{% load static %}
+<link rel="stylesheet"  href="{% static 'home/css/home.css' %}">
+<link rel="stylesheet"  href="{% static 'home/css/slider.css' %}">
+{% endblock %}
+{% block body %}
+<div class="wrapper">
+    <div class="slideshows">
+      <div class="slideshow slideshow--hero">
+        <div class="slides">
+          <div class="slide slide1" style="background-image: url('{% static 'home/asset/bg4.jpg' %}');"> </div>
+          <div class="slide slide2" style="background-image: url('{% static 'home/asset/bg1.jpeg' %}');" ></div>
+          <div class="slide slide3" style="background-image: url('{% static 'home/asset/bg2.png' %}');"></div>
+        </div>
+      </div>
+      <div class="slideshow slideshow--contrast slideshow--contrast--before">
+        <div class="slides">
+          <div class="slide slide1" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url('{% static 'home/asset/bg4.jpg' %}');"></div>
+          <div class="slide slide2" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url('{% static 'home/asset/bg1.jpeg' %}');"></div>
+          <div class="slide slide3" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url('{% static 'home/asset/bg2.png' %}');"></div>
+        </div>
+      </div>
+      <div class="slideshow slideshow--contrast slideshow--contrast--after">
+        <div class="slides">
+          <div class="slide slide1" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url('{% static 'home/asset/bg4.jpg' %}');"></div>
+          <div class="slide slide2" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url('{% static 'home/asset/bg1.jpeg' %}');"></div>
+          <div class="slide slide3" style="background-image: linear-gradient(to bottom, rgba(200, 200, 75, 0.25) 0, rgba(200, 75, 75, 0.5) 100%), url('{% static 'home/asset/bg2.png' %}');"></div>
+        </div>
+      </div>
+    </div>
+    <div>
+  </div>
+{% endblock %}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" href="">
+    {% load static %}
+    <title>Kewin Chemicals</title>
+    <link rel="stylesheet" href="{% static 'home/css/index.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+        integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
+        <script src="{% static 'home/js/jquery3.min.js' %}" ></script>
+    {% block head_link %}
+    {% endblock %}
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <div class="mynav ">
+                <input type="checkbox" id="nav-check" />
+                <div class="nav-header">
+                    <div class="nav-title">
+                        <img src="{% static 'home/asset/logoWhite.png' %}" id='logo' alt="" />
+                    </div>
+                </div>
+                <div class="nav-btn"><label for="nav-check"><span></span><span></span><span></span></label></div>
+                <div class="nav-links">
+                    <div class="search_div">
+                        <input type="text" class="search_input" name="search" id="search" placeholder="search">
+                        <span class="fa fa-search "></span>
+                    </div>
+
+                    <a href="{% url 'home' %}">Home</a>
+                    <div  class="dropdown"><a href="{% url 'product' %}" class="prod_link">Products Segment</a><i class="arrow down"></i>
+                        <div class="dropdown-content">
+                            <a href="{% url 'dye_and_intermediates' %}">Dyes &amp; Intermediates</a>
+                            <a href="{% url 'Food_and_pharma' %}">FOOD &amp; PHARMA</a>
+                            <a href="{% url 'shades_and_pigments' %}">Shades of Pigments</a>
+                            <a href="{% url 'varieties_and_cosmetics' %}">varieties in Cosmetics</a>
+                        </div>
+                    </div>
+                    <a href="{%  url 'news_feed' %}">News Feed</a>
+                    <a href="{%  url 'about_us' %}">About Us</a>
+                    <a href="{% url 'contact_us' %}">Contact</a>
+                    <a href="http://wa.me/+919879563306"><i class="fab fa-whatsapp" style="color: #FFFFFF;"></i></a>
+                    <a href="http://wa.me/+919879563306"><i class="fab fa-weixin" style="color: #FFFFFF;"></i></a>
+                    <a href="mailto:{{details.customer_care_Email_Id}}"><i class="far fa-envelope" style="color: #FFFFFF;"></i></a>
+                    <div class="google_element_tag"><div id="google_translate_element" class="google_translate"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search_page">
+        <div class="searchbar">
+            {% csrf_token %}
+            <input type="search" placeholder="Search here" name="search" class="searchbar-input" id = "search_">
+            <i class="fa fa-times cross-icon fa-lg" id="close_search"></i>
+        </div>
+    </div>
+        {% block body %}
+        {% endblock%}
+        {% block footer %}
+        {% endblock %}
+</body>
+{% block end_script %}
+{% endblock %}
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+    }
+</script>
+
+<script src="{% static 'home/js/jquery.autocomplete.js' %}"></script>
+<script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="{% static 'home/js/jquery.session.js' %}"></script>
+<script src="{% static 'home/js/base_search.js' %}"></script>
+
+
+
+</html>

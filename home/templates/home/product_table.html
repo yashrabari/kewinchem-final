@@ -1,0 +1,1615 @@
+{% extends 'home/base.html' %}
+{% block head_link %}
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'home/css/jquery.dataTables.min.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/footer_.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{% static 'home/js/jquery.dataTables.min.js'  %}"></script>
+<link rel="stylesheet" href="{% static 'home/css/table_.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div class="modal fade show" id="exampleModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="full_name">Full Name</label>
+                        <input type="text" class="form-control" id="full_name" aria-describedby="nameHelp"
+                            placeholder="Enter Your Full Name">
+                        <small id="nameHelp" class="form-text text-muted">We'll never share your Full Name with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputmobile">Mobile Number</label>
+                        <input type="number" class="form-control" id="exampleInputmobile" placeholder="Mobile Number"
+                            aria-describedby="numberHelp">
+                        <small id="numberHelp" class="form-text text-muted">We'll never share your Number with anyone
+                            else.</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="submit_details" class="btn btn-primary">Submit Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--------------------------------------------------------------------------->
+<section class="lg-space" id="product">
+    <div class="my_container">
+        <div class="content">
+            <h1 class="head">Get Free Samples Now.</h1>
+            <p class="para">Samples under 500 grams per product is free to be arranged. Factory standard samples will be
+                sent to you within 2 working days. Counter samples to customer’s standard can be sent within 5 working
+                days.</p><a href="#prod"><button id="c2a">Discover Now</button></a>
+        </div>
+        <div class=""></div>
+    </div>
+</section>
+
+
+<div class="alert alert-danger p-3 m-1" id="ack_msg" role="alert" style="white-space: pre-wrap;">
+
+</div>
+{% if product_name == "intermediates" %}
+<div class="side_filter_wrapper">
+    <div class="title_inter">
+        <p>Compound</p>
+    </div>
+<ul style="list-style-type:disc" >
+    {% if compounds %}
+    {% for i in compounds %}
+    <li class="cat_li">{{i.0}}</li>
+    {% endfor %}
+    {% endif %}
+</ul>
+</div>  
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container" style="width: 70%;">
+            <div class="pro_cat_table">
+                <h1 id="prod">intermediates</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a data-toggle="modal" href="#exampleModalCenter"
+                        class="free-sample-btn">Free Sample</a>
+                </div>
+                
+                <!-- <div class="search-entries cf">
+                    <div class="entries-part"><span class="entries-txt">Show </span>
+                        <div class="entries-drop-down"><select class="mySelectBoxclassName">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select></div><span class="entries-txt">entries</span>
+                    </div>
+                    <div class="search-part"><label class="search-txt">Search:</label><input type="text"
+                            placeholder="Search Entries" value=""></div>
+                </div> -->
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Compound</th>
+                                <th>ProductName</th>
+                                <th>CAS no</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.compound}}</td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div class="pagination-part cf">
+                    <div class="pagination-txt"><span>Showing 1 to 10 of 299 entries</span></div>
+                    <div class="pagination-numb">
+                        <ul class="pagination">
+                            <li class="disabled"><a class="" href="#" aria-label="Go to previous page">⟨</a></li>
+                            <li class="active"><a class="undefined" href="#" aria-label="Go to page number 1">1</a></li>
+                            <li class=""><a class="" href="#" aria-label="Go to page number 2">2</a></li>
+                            <li class=""><a class="" href="#" aria-label="Go to page number 3">3</a></li>
+                            <li class=""><a class="" href="#" aria-label="Go to page number 4">4</a></li>
+                            <li class=""><a class="" href="#" aria-label="Go to page number 5">5</a></li>
+                            <li class=""><a class="" href="#" aria-label="Go to next page">⟩</a></li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+</div>
+
+{% elif product_name == "acid_dyes" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Acide & Dyes</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>CI Name</th>
+                                <th>CAS no</th>
+                                <th>Application</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.CI_Name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.Application}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+{% elif product_name == "basic_dyes" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Powder</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Basic Dyes</th>
+                                <th>CAS no</th>
+                                <th>Compound</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.compound}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+{% elif product_name == "food_and_lake" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Food &amp; Color</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>CI No</th>
+                                <th>FD &amp; C COLOR</th>
+                                <th>CI Reference</th>
+                                <th>EC No</th>
+                                <th>CAS no</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.ci_no}}</td>
+                                <td data-label="">{{d.FD_C_color}}</td>
+                                <td data-label="">{{d.CI_refrence}}</td>
+                                <td data-label="">{{d.EC_no}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+{% elif product_name == "solvent_dyes" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Solvent Dyes</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>CAS no</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+{% elif product_name == "reactive_dyes" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Reactive Dyes </h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>CAS no</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "D_C_color" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">D &amp; C Color </h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>CI No</th>
+                                <th>D&amp;C No</th>
+                                <th>CI Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.CI_no}}</td>
+                                <td data-label="">{{d.D_C_no}}</td>
+                                <td data-label="">{{d.CI_Name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% elif product_name == "lake_color" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Lake Color</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>Color Index No</th>
+                                <th>EEC No</th>
+                                <th>CAS No</th>
+                                <th>Other Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.color_index_no}}</td>
+                                <td data-label="">{{d.EEC_no}}</td>
+                                <td data-label="">{{d.CASE_no}}</td>
+                                <td data-label="">{{d.Other_name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "ess_base_oil" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{oil_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "oleoresin" or product_name == "natural_flower" %}
+
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{oil_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+
+
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>CAS no</th>
+                                <th>botonic Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.botonic_name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% elif product_name == "Veterinary Apis" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Veterinary Apis</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Name Of API</th>
+                                <th>CAS no</th>
+                                <th>Therapeutic Segments</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.name_of_api}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.Therapeutic_Segments}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+{% elif product_name == "Reference Standards & Impurities" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Reference Standards &amp; Impurities</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Impurity Name</th>
+                                <th>CAS no</th>
+                                <th>Product Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.impurity_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.Product_name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "Pellets" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">Pellets</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Name Of API</th>
+                                <th>CAS no</th>
+                                <th>Therapeutic Segments</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.name_of_api}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.Therapeutic_Segments}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "Patented Impurity Products" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Impurity Name</th>
+                                <th>CAS no</th>
+                                <th>Product Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.impurity_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.Product_name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% elif product_name == "Medical Supplie & Equipments" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "Poultry Products" or product_name == "Other Products" or product_name == "Live Stock Products" or product_name == "Companion Animal Product" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>Presentation</th>
+                                <th>Dosage Form</th>
+                                <th>Therapeutic Segments</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.presentation}}</td>
+                                <td data-label="">{{d.dosage_form}}</td>
+                                <td data-label="">{{d.therapeutic_segments}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "Tablet & Capsules" or product_name == "Combination Formulations" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>Strength</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.strength}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% elif product_name == "Stabilized Vitamins" or product_name == "Specialities" or product_name == "Amino Acid" or product_name == "Minerals" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>Strength</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.strength}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% elif product_name == "Oral Suspension" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "Nasal Drop" or product_name == "Ointments" or product_name == "Injectables" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>Strength</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.strength}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+{% elif shades_pigment_common %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                <th>case_no</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% elif product_name == "Flouroscent Pigments" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+{% elif product_name == "Mill Dyes" or product_name == "Levelling Dyes" or product_name == "1 1 METAL COMPLEX DYES" or product_name == "1 2 METAL COMPLEX DYES" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Shade </th>
+                                <th>C.I Name </th>
+                                <th>CAS no </th>
+                                <th>Application </th>
+
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.shade}}</td>
+                                <td data-label="">{{d.C_I_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.Application}}</td>
+
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "Acid Dyes" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Shade </th>
+                                <th>C.I Name </th>
+                                <th>CAS no </th>
+                                <th>Application </th>
+                                <th>Wool </th>
+                                <th>Polyamide </th>
+                                <th>Wood Stain </th>
+                                <th>Leathe </th>
+                                <th>Cotton </th>
+                                <th>Paper </th>
+                                <th>Alluminium Anodize </th>
+                                <th>SILK </th>
+                                <th>INK </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.shade}}</td>
+                                <td data-label="">{{d.C_I_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.Application}}</td>
+                                <td data-label="">{{d.wool}}</td>
+                                <td data-label="">{{d.Polyamide}}</td>
+                                <td data-label="">{{d.Wood_Stain}}</td>
+                                <td data-label="">{{d.Leather}}</td>
+                                <td data-label="">{{d.Cotton}}</td>
+                                <td data-label="">{{d.Paper}}</td>
+                                <td data-label="">{{d.Alluminium_Anodize}}</td>
+                                <td data-label="">{{d.SILK}}</td>
+                                <td data-label="">{{d.INK}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif product_name == "Direct Dyes" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Shade </th>
+                                <th>C.I Name </th>
+                                <th>CAS no </th>
+                                <th>Application </th>
+                                <th>Wool </th>
+                                <th>Polyamide </th>
+                                <th>Wood Stain </th>
+                                <th>Leathe </th>
+                                <th>Cotton </th>
+                                <th>Paper </th>
+                                <th>Alluminium Anodize </th>
+                                <th>SILK </th>
+                                <th>INK </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.shade}}</td>
+                                <td data-label="">{{d.CI_Name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.Application}}</td>
+                                <td data-label="">{{d.Wool}}</td>
+                                <td data-label="">{{d.Polyamide}}</td>
+                                <td data-label="">{{d.Wood_Stain}}</td>
+                                <td data-label="">{{d.Leather}}</td>
+                                <td data-label="">{{d.cotton}}</td>
+                                <td data-label="">{{d.Paper}}</td>
+                                <td data-label="">{{d.Alluminium_Anodize}}</td>
+                                <td data-label="">{{d.Silk}}</td>
+                                <td data-label="">{{d.Ink}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+{% elif product_name == "Basic Dyes Liquid" or product_name == "Basic Dyes Powder" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Name </th>
+                                <th>CAS no </th>
+                                <th>Compound </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                <td data-label="">{{d.compound}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+{% elif product_name == "Blended Color" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Name </th>
+                                <th>CAS no </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+{% elif product_name == "D & C Color" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>CI_Name </th>
+                                <th>D C No </th>
+                                <th>CI Name </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.CI_Name}}</td>
+                                <td data-label="">{{d.D_C_no}}</td>
+                                <td data-label="">{{d.CI_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+{% elif product_name == "FD & C Color" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>FD &amp; C Color </th>
+                                <th>Common Name</th>
+                                <th>Hue</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.FD_C_color}}</td>
+                                <td data-label="">{{d.common_name}}</td>
+                                <td data-label="">{{d.Hue}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+{% elif product_name == "Food Color"%}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name </th>
+                                <th>CI No</th>
+                                <th>FD &amp; C Color</th>
+                                <th>CI Refrence </th>
+                                <th>EC No</th>
+                                <th>CAS no</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.ci_no}}</td>
+                                <td data-label="">{{d.FD_C_color}}</td>
+                                <td data-label="">{{d.CI_refrence}}</td>
+                                <td data-label="">{{d.EC_no}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% elif product_name == "Lake Color" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name </th>
+                                <th>CI No</th>
+                                <th>EEC No</th>
+                                <th>CAS no</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.ci_no}}</td>
+                                <td data-label="">{{d.EEC_no}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+{% elif flag %}
+{% if flag == "reactive_dyes" %}
+<div id="wrapper">
+    <section class="inn_pro_cat-detl">
+        <div class="my_container">
+            <div class="pro_cat_table">
+                <h1 id="prod">{{product_name}}</h1>
+                <div class="free-sample-part"><span class="free-sample-txt">Select products and get free sample
+                        delivered at your door step.</span><a href="#" class="free-sample-btn">Free Sample</a></div>
+                <div class="tbl-part">
+                    <table class="pro-cat-tbl-del" id="my-table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Select</th>
+                                <th>Product Name </th>
+                                <th>CAS no</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in data %}
+                            <tr>
+                                <td data-label="">{{d.id}}</td>
+                                <td data-label="Select"><label class="check-btn"><input type="checkbox" name="checkbox"
+                                    value="1"></label></td>
+                                <td data-label="">{{d.product_name}}</td>
+                                <td data-label="">{{d.case_no}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endif %}
+
+
+{% endif %}
+{% include 'home/footer.html' %}
+{% endblock %}
+{% block end_script %}
+<script src="{% static 'home/js/table_fetch.js' %}"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#ack_msg").hide();
+        $(".free-sample-btn").attr("data-toggle", "modal");
+        $(".free-sample-btn").prop("href", "#exampleModalCenter");
+        var table = $("#my-table").DataTable({
+            language: {
+                searchPlaceholder: "Search records",
+                search: "",
+            },
+            responsive: true,
+            "aLengthMenu": [[5, 10, 20, 50, 100, -1], [5, 10, 20, 50, 100, "All"]],
+            "iDisplayLength": 20,
+            "autoWidth": true,
+
+        });
+        table.columns.adjust()
+        
+        $(".cat_li").on("click",function(){
+            var filter_val = $(this).html();
+            if(filter_val.length > 0 )
+            {
+                
+                table.column(1).search(filter_val).draw();
+                $(".side_filter_wrapper").height($("#my-table").height());
+                
+            }
+            
+        });
+        {% if request.method == "GET" %}
+        table.search("{{request.GET.query}}").draw();
+        {% endif %}
+        $("#submit_details").on("click", function (e) {
+            //e.preventDefault();
+            user_errors = validate_user_details();
+
+            if (user_errors.length == 0) {
+
+                if (validate_selection()) {
+                    var data = prepare_data();
+                    if (data != undefined) {
+                        var file = create_file(data)
+                        if (file != undefined) {
+
+                            ack = prepare_request(file, '{{ csrf_token }}', "{% url 'free_sample' %}");
+                        }
+                        {
+                            toggle_msg_class(2);
+                            msg_show("Please Wait!!!!!!!!");
+                        }
+
+                    }
+                    else {
+                        toggle_msg_class(2);
+                        msg_show("Error While Generating Data!!! Plear Try again Later or Contact Customer Support!!!!");
+                    }
+                } else {
+                    toggle_msg_class(2);
+                    msg_show("No Product Selected!!!!!!!!");
+                }
+            }
+            else {
+                toggle_msg_class(2);
+                msg_show(user_errors.join(",\n"));
+                $("#exampleModalCenter").modal("hide");
+
+            }
+            
+            $("#exampleModalCenter").modal("hide");
+            $("html, body").animate({ scrollTop: (0,120) }, "slow");
+
+            //$($($($($('input[name="checkbox"]:checked')).parent()).parent()).parent()).children());
+        });
+    });
+</script>
+
+{% endblock %}

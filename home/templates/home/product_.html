@@ -1,0 +1,57 @@
+{% extends 'home/base.html' %}
+{% block head_link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'home/css/product.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/footer_.css' %}">
+{% endblock %}
+
+{% block body %}
+<section class="lg-space" id="product">
+    <div class="container">
+        <div class="content">
+            <h1 class="head">Get Free Samples Now.</h1>
+            <p class="para">Samples under 500 grams per product is free to be arranged. Factory standard samples will be
+                sent to you within 2 working days. Counter samples to customer’s standard can be sent within 5 working
+                days.</p><a href="#prod"><button id="c2a">Discover Now</button></a>
+        </div>
+        <div class=""></div>
+    </div>
+</section>
+
+
+
+
+
+
+<div id="wrapper">
+    <section class="product-part">
+        <div class="container">
+            <div class="product-inner-part">
+                <h3 id="prod">Our Products</h3>
+                <div class="img-part">
+                    <ul class="grid cf">
+                        <li class="animate"><a href="{% url 'dye_and_intermediates' %}"><img
+                                    src="{{ cate_images.0.Refrence_image.url }}" alt="">
+                                <div class="inner-headign"><span class="pro-title">Dyes &amp; Intermediates</span></div>
+                            </a></li>
+                        <li class="animate"><a href="{% url 'Food_and_pharma' %}"><img src="{{ cate_images.1.Refrence_image.url }}"
+                                    alt="">
+                                <div class="inner-headign"><span class="pro-title">FOOD &amp; PHARMA</span></div>
+                            </a></li>
+                        <li class="animate"><a href="{% url 'shades_and_pigments' %}"><img
+                                    src="{{ cate_images.2.Refrence_image.url }}" alt="">
+                                <div class="inner-headign"><span class="pro-title">shades of pigments</span></div>
+                            </a></li>
+                        <li class="animate"><a href="{% url 'varieties_and_cosmetics' %}"><img
+                                    src="{{ cate_images.3.Refrence_image.url }}" alt="">
+                                <div class="inner-headign"><span class="pro-title">varieties in Cosmetics</span></div>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="sm-space"></section>
+</div>
+{% include 'home/footer.html' %}
+{% endblock %}

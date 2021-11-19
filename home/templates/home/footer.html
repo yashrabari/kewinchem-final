@@ -1,0 +1,68 @@
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<div class="main_footer">
+    <footer class="footer-distributed">
+
+        <div class="footer-left">
+
+            <img src="{% static 'home/asset/logoWhite.png' %}" id='logo' alt="" />
+
+            <p class="footer-links">
+                <a href="{% url 'home' %}" class="link-1">Home</a>
+
+                <a href="{% url 'about_us' %}">About</a>
+
+                <a href="{% url 'product' %}">Products</a>
+
+                <a href="{% url 'news_feed' %}">News Feed</a>
+
+                <a href="{% url 'contact_us' %}">Contact</a>
+            </p>
+
+            <p class="footer-company-name">© Copyright 1996 Kewin Chemicals. All Rights Reserved.</p>
+        </div>
+
+        <div class="footer-center">
+
+            <div class='bounce'>
+                <a class="icon-center" href="https://www.google.com/maps/dir/23.0642107,72.4849859/kewin+chemicals/@23.044659,72.4838337,13z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x395e848aa5155555:0xb8730d1b59be389f!2m2!1d72.5300895!2d23.0296941">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p><span>{{details.Address_Line_1}}</span> {{details.Address_Line_2}}.
+                        <br> PIN {{details.pincode}}</p>
+                </a>
+            </div>
+
+            <div class='bounce'>
+                <a class="icon-center" href="Tel:+{{details.customer_care_number}}">
+                    <i class="fas fa-phone"></i>
+                    <p>+91 {{details.customer_care_number}}</p>
+                </a>
+            </div>
+
+            <div class='bounce'>
+                <a class="icon-center" href="mailto:{{details.customer_care_Email_Id}}">
+                    <i class="fa fa-envelope"></i>
+                    <p>{{details.customer_care_Email_Id}}</p>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="footer-right">
+
+            <p class="footer-company-about">
+                <span>About the company</span>
+                Kewin Chem is one of the leading chemical companies in India employing advanced technologies to develop and supply dyes and pigments, intermediates ...
+</p>
+
+            <div class="footer-icons">
+
+                <a class='bounce' href="https://www.facebook.com/kewin.chemical"><i class="fab fa-facebook-f"></i></a>
+                <a class='bounce' href="http://wa.me/+919879563306"><i class="fab fa-whatsapp"></i></a>
+                <a class='bounce' href="http://wa.me/+919879563306"><i class="fab fa-weixin"></i></a>
+            </div>
+
+        </div>
+
+    </footer>
+</div>

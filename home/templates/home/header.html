@@ -1,0 +1,32 @@
+{% load static %}
+<div style="background-color:#212121">
+    <div class="header">
+        <div class="mynav">
+            <input type="checkbox" id="nav-check" />
+            <div class="nav-header">
+                <div class="nav-title">
+                    <img src="{% static 'home/asset/logoWhite.png' %}" id='logo' alt="" />
+                </div>
+            </div>
+            <div class="nav-btn"><label for="nav-check"><span></span><span></span><span></span></label></div>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                    <div href="{% url 'product' %}" class="dropdown"><a href="{% url 'product' %}" class="prod_link">Products Segment</a> <i class="arrow down"></i>
+                        <div class="dropdown-content">
+                            <a href="{% url 'dye_and_intermediates' %}">Dyes &amp; Intermediates</a>
+                            <a href="{% url 'Food_and_pharma' %}">FOOD &amp; PHARMA</a>
+                            <a href="{% url 'shades_and_pigments' %}">Shades of Pigments</a>
+                            <a href="{% url 'varieties_and_cosmetics' %}">varieties in Cosmetics</a>
+                        </div>
+                    </div>
+                    <a href="{%  url 'news_feed' %}">News Feed</a>
+                    <a href="{%  url 'about_us' %}">About Us</a>
+                    <a href="{% url 'contact_us' %}">Contact</a>
+                    <a href="http://wa.me/+919879563306"><i class="fab fa-whatsapp" style="color: #FFFFFF;"></i></a>
+                    <a href="http://wa.me/+919879563306"><i class="fab fa-weixin"></i></a>
+                    <a href="mailto:{{details.customer_care_Email_Id}}"><i class="far fa-envelope" style="color: #FFFFFF;"></i></a>
+                    <div id="google_translate_element" class="google_translate"></div>
+            </div>
+        </div>
+    </div>
+</div>
